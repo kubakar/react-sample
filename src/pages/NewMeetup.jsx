@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import NewMeetupForm from "../components/meetups/NewMeetUpForm";
 import { useNavigate } from "react-router-dom";
 import Todo from "../components/Todo";
@@ -22,17 +23,33 @@ function NewMeetupPage() {
       .catch((e) => console.warn(e)); // navigate to different page when data is fetched
   };
 
+  const [counter, setCounter] = useState({ value: 0, trigger: false });
+
+  useEffect(() => {
+    setCounter({
+      value: +document.getElementById("qwe").childElementCount,
+      trigger: false,
+    }); // init
+
+    console.log(counter);
+
+    // cleanup function runs before each execution except the first one!
+    return () => {
+      console.warn("USE_EFFECT CLEANUP");
+    };
+  }, [counter.trigger]); // will execute every time counter trigger is changed
+
   return (
     <div>
       <h1>NewMeetupPage</h1>
       <NewMeetupForm onAddMeetup={addMeetupHandler} />
       <br />
       <hr />
-      <div>
-        <h1>My Todos</h1>
-        <Todo text="React" newId="R" />
-        <Todo text="Angular" newId="A" />
-        <Todo text="Vue" newId="V" />
+      <div id="qwe">
+        <h1>My Todos -{` ${counter.value - 1}`}</h1>
+        <Todo text="React" newId="R" onAction={setCounter} />
+        <Todo text="Angular" newId="A" onAction={setCounter} />
+        <Todo text="Vue" newId="V" onAction={setCounter} />
       </div>
     </div>
   );

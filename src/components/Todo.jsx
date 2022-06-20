@@ -1,6 +1,7 @@
 import Modal from "./Modal";
+import ReactDOM from "react-dom";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function Todo(props) {
   // 'useState' always returns 2 elements : current state & handler function
@@ -19,6 +20,8 @@ function Todo(props) {
 
   const _id = props.newId; // property
 
+  let c = 0;
+
   // "props" is a  component parameter object
   // {} - dynamic acccess
   return (
@@ -29,16 +32,25 @@ function Todo(props) {
           Delete
         </button>
       </div>
-      {_modalIsOpen ? ( // conditional rendering
-        <Modal
-          onCancel={closeModal} // pass 'closeModal' callback to the component
-          onConfirm={() => {
-            document.getElementById(`${_id}`).remove();
-            console.log(_id);
-            closeModal();
-          }}
-        />
-      ) : null}
+      {_modalIsOpen // conditional rendering
+        ? // use react "Portal" to host JSX in different root -> see "index.html"
+          ReactDOM.createPortal(
+            <Modal
+              onCancel={closeModal} // pass 'closeModal' callback to the component
+              onConfirm={() => {
+                document.getElementById(`${_id}`).remove();
+                // console.log(_id);
+                closeModal();
+                // +++
+                props.onAction((prevState) => ({
+                  ...prevState,
+                  trigger: true,
+                }));
+              }}
+            />,
+            document.getElementById("modal-root") // in "index.html"
+          )
+        : null}
       {/* default 'onClick' does not exist on custom (own) component */}
     </div>
   );
