@@ -18,7 +18,8 @@ root.render(
 
   // provide global state/context to whole app
   <FavsCtxProvider>
-    <BrowserRouter>
+    {/* https://create-react-app.dev/docs/deployment/ */}
+    <BrowserRouter basename="/react-sample">
       <App />
     </BrowserRouter>
   </FavsCtxProvider>

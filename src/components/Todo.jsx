@@ -20,8 +20,6 @@ function Todo(props) {
 
   const _id = props.newId; // property
 
-  let c = 0;
-
   // "props" is a  component parameter object
   // {} - dynamic acccess
   return (
