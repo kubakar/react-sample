@@ -53,7 +53,11 @@ function AllMeetupsPage() {
         // loadedMeetups = [...newData]; // alternative with global data
         setLoadedMeetups(newData);
       })
-      .catch((err) => console.warn(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.warn(err);
+        throw new Error("Meetups fetch error"); // HTTP error
+      });
   }, []); // 2nd arg - array of dependecies (when to execute)
 
   if (isLoading) {
