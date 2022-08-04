@@ -46,7 +46,7 @@ function NewMeetupPage() {
       <br />
       <hr />
       <div id="qwe">
-        <h1>My Todos -{` ${counter.value - 1}`}</h1>
+        <h1>My TodoCards -{` ${counter.value - 1}`}</h1>
         <Todo text="React" newId="R" onAction={setCounter} />
         <Todo text="Angular" newId="A" onAction={setCounter} />
         <Todo text="Vue" newId="V" onAction={setCounter} />

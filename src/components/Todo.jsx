@@ -59,7 +59,7 @@ function Todo(props) {
 }
 
 Todo.propTypes = {
-  text: PropTypes.string, // picked up by Story book
+  text: PropTypes.string.isRequired, // picked up by Story book
   btnCaption: PropTypes.string, // picked up by Story book
 };
 

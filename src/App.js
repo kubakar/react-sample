@@ -6,16 +6,6 @@ import NewMeetupPage from "./pages/NewMeetup";
 import FavoritesPage from "./pages/Favorites";
 import MainNaviagation from "./components/MainNavigation";
 
-// <div>
-//   <div>
-//     <h1>My Todos</h1>
-//     <Todo text="React" newId="R" />
-//     <Todo text="Angular" newId="A" />
-//     <Todo text="Vue" newId="V" />
-//   </div>
-//   <hr />
-// </div>
-
 // const App = () => {
 //   let routes = useRoutes([
 //     { path: "/", element: <AllMeetupsPage /> },
