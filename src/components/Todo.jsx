@@ -1,7 +1,8 @@
+import css from "./Todo.module.css";
 import Modal from "./Modal";
 import ReactDOM from "react-dom";
-
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 function Todo(props) {
   // 'useState' always returns 2 elements : current state & handler function
@@ -14,6 +15,9 @@ function Todo(props) {
     _setModal(true); // change state
   };
 
+  const clickHandler = props.clickHandler || deleteModalHandler;
+  const btnCaption = props.btnCaption || "Delete";
+
   const closeModal = function (num) {
     _setModal(false); // change state
   };
@@ -23,11 +27,11 @@ function Todo(props) {
   // "props" is a  component parameter object
   // {} - dynamic acccess
   return (
-    <div className="card" id={_id}>
+    <div className={css.card} id={_id}>
       <h2>{props.text}</h2>
       <div className="action">
-        <button className="btn" onClick={deleteModalHandler}>
-          Delete
+        <button className={css.btn} onClick={clickHandler}>
+          {btnCaption}
         </button>
       </div>
       {_modalIsOpen // conditional rendering
@@ -53,5 +57,10 @@ function Todo(props) {
     </div>
   );
 }
+
+Todo.propTypes = {
+  text: PropTypes.string, // picked up by Story book
+  btnCaption: PropTypes.string, // picked up by Story book
+};
 
 export default Todo; // custom components start with capital letter
